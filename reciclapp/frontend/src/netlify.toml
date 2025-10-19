@@ -1,0 +1,4 @@
+[build]
+  base = "reciclapp/frontend"
+  command = "npm run build"
+  publish = "reciclapp/frontend/dist"
