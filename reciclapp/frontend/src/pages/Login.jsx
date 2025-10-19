@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate, Link } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -13,42 +13,65 @@ function Login() {
     e.preventDefault();
     try {
       const res = await api.post("/users/login", { email, password });
-      login(res.data.user, res.data.token);
+      login(res.data);
       navigate("/home");
     } catch (err) {
-      alert("Credenciales incorrectas o error en login");
+      alert("❌ Credenciales incorrectas o error al iniciar sesión.");
+      console.error(err);
     }
   };
 
   return (
-    <div className="p-4 max-w-sm mx-auto">
-      <h1 className="text-xl font-bold mb-4">Iniciar sesión</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <input
-          type="email"
-          placeholder="Correo"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="p-2 border rounded"
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="p-2 border rounded"
-        />
-        <button type="submit" className="bg-green-600 text-white p-2 rounded">
-          Entrar
-        </button>
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-green-100 to-green-300">
+      <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+        <h1 className="text-2xl font-bold text-center text-green-700 mb-6">
+          ♻️ Bienvenido a Reciclapp
+        </h1>
 
-      <p className="mt-4">
-        ¿No tienes cuenta?{" "}
-        <Link to="/register" className="text-blue-600">
-          Regístrate aquí
-        </Link>
-      </p>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Correo electrónico
+            </label>
+            <input
+              type="email"
+              placeholder="tuemail@ejemplo.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Contraseña
+            </label>
+            <input
+              type="password"
+              placeholder="********"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mt-1 w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white p-3 rounded-lg font-semibold hover:bg-green-700 transition"
+          >
+            Iniciar sesión
+          </button>
+        </form>
+
+        <p className="mt-6 text-center text-gray-600">
+          ¿No tienes cuenta?{" "}
+          <Link to="/register" className="text-green-700 font-semibold hover:underline">
+            Regístrate aquí
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
