@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://reciclapp-backend.onrender.com" // apunta al backend
+  baseURL: "https://reciclapp-backend.onrender.com/api" // apunta al backend
 });
 
 // Interceptor para añadir el token si existe
