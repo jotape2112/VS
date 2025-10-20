@@ -6,7 +6,7 @@ function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("user");
+  const [role, setRole] = useState("usuario");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -50,8 +50,8 @@ function Register() {
           onChange={(e) => setRole(e.target.value)}
           className="p-2 border rounded"
         >
-          <option value="user">Usuario</option>
-          <option value="company">Empresa</option>
+          <option value="usuario">Usuario</option>
+          <option value="empresa">Empresa</option>
         </select>
         <button type="submit" className="bg-green-600 text-white p-2 rounded">
           Registrar
