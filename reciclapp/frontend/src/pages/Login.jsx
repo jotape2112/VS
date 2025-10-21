@@ -11,15 +11,23 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await api.post("/users/login", { email, password });
-      login(res.data);
-      navigate("/home");
-    } catch (err) {
-      alert("❌ Credenciales incorrectas o error al iniciar sesión.");
-      console.error(err);
-    }
-  };
+  try {
+    const res = await api.post("/users/login", { email, password });
+
+    // 🧠 Guardamos token y datos del usuario
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+
+    // 👇 Actualizamos el contexto global
+    login(res.data);
+
+    navigate("/home");
+  } catch (err) {
+    alert("❌ Credenciales incorrectas o error al iniciar sesión.");
+    console.error(err);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-green-100 to-green-300">
