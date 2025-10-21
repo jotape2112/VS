@@ -14,11 +14,7 @@ function Login() {
   try {
     const res = await api.post("/users/login", { email, password });
 
-    // 🧠 Guardamos token y datos del usuario
-    localStorage.setItem("token", res.data.token);
-    localStorage.setItem("user", JSON.stringify(res.data.user));
-
-    // 👇 Actualizamos el contexto global
+    // 🧠 Pasamos la respuesta completa como objeto { user, token }
     login(res.data);
 
     navigate("/home");
@@ -27,6 +23,7 @@ function Login() {
     console.error(err);
   }
 };
+
 
 
   return (
