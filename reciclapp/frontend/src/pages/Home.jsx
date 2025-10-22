@@ -12,6 +12,9 @@ function Home() {
       navigate("/");
     }
   }, [user, navigate]);
+  useEffect(() => {
+    console.log("Auth user:", user);
+  }, [user]);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-100 to-green-300">
