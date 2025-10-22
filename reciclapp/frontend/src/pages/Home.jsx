@@ -2,25 +2,23 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-const { user, logout } = useContext(AuthContext);
-const navigate = useNavigate();
-
-useEffect(() => {
-  console.log("🔍 Usuario logueado:", user);
-}, [user]);
-
-
 function Home() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // Si no hay usuario autenticado, redirige al login automáticamente
   useEffect(() => {
-    if (!user) {
-      navigate("/");
-    }
-  }
+    console.log("🔍 Usuario logueado:", user);
+  }, [user]);
 
+  return (
+    <div className="p-4">
+      <h1 className="text-xl font-bold mb-6">Bienvenido, {user?.name}</h1>
+      {/* resto del código */}
+    </div>
+  );
+}
+
+export default Home;
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-100 to-green-300">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md text-center">
@@ -80,4 +78,4 @@ function Home() {
   );
 }
 
-export default Home;
+
