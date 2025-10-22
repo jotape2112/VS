@@ -17,8 +17,6 @@ export default defineConfig({
         display: "standalone",
         scope: "/",
         start_url: "/",
-        scope: "/",
-        start_url: "/",
         icons: [
           {
             src: "/icons/icon-192x192.png",
