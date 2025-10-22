@@ -2,6 +2,14 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
+const { user, logout } = useContext(AuthContext);
+const navigate = useNavigate();
+
+useEffect(() => {
+  console.log("🔍 Usuario logueado:", user);
+}, [user]);
+
+
 function Home() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -11,10 +19,7 @@ function Home() {
     if (!user) {
       navigate("/");
     }
-  }, [user, navigate]);
-  useEffect(() => {
-    console.log("Auth user:", user);
-  }, [user]);
+  }
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-100 to-green-300">
