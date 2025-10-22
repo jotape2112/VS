@@ -20,34 +20,49 @@ function Home() {
           ♻️ Bienvenido{user ? `, ${user.name}` : ""}!
         </h1>
 
-        <div className="flex flex-col gap-4">
-          <button
-            onClick={() => navigate("/history")}
-            className="bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600 transition"
-          >
-            Ver Historial de Solicitudes
-          </button>
-
-          <button
-            onClick={() => navigate("/points")}
-            className="bg-green-600 text-white p-3 rounded-lg font-semibold hover:bg-green-700 transition"
-          >
-            Ver Puntos de Reciclaje
-          </button>
-
-          <button
-            onClick={() => navigate("/new-request")}
-            className="bg-purple-600 text-white p-3 rounded-lg font-semibold hover:bg-purple-700 transition"
-          >
-            Nueva Solicitud
-          </button>
-
+       <div className="flex flex-col gap-3">
+          {user?.role === "usuario" && (
+            <>
+              <button
+                onClick={() => navigate("/new-request")}
+                className="bg-purple-600 text-white p-2 rounded"
+              >
+                Nueva Solicitud
+              </button>
+        
+              <button
+                onClick={() => navigate("/history")}
+                className="bg-blue-500 text-white p-2 rounded"
+              >
+                Ver Historial de Solicitudes
+              </button>
+        
+              <button
+                onClick={() => navigate("/points")}
+                className="bg-green-600 text-white p-2 rounded"
+              >
+                Ver Puntos de Reciclaje
+              </button>
+            </>
+          )}
+        
+          {user?.role === "empresa" && (
+            <>
+              <button
+                onClick={() => navigate("/requests")}
+                className="bg-blue-500 text-white p-2 rounded"
+              >
+                Ver Solicitudes
+              </button>
+            </>
+          )}
+        
           <button
             onClick={() => {
               logout();
               navigate("/");
             }}
-            className="bg-red-500 text-white p-3 rounded-lg font-semibold hover:bg-red-600 transition"
+            className="bg-red-500 text-white p-2 rounded"
           >
             Cerrar Sesión
           </button>
