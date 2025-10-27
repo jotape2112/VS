@@ -13,9 +13,8 @@ function Login() {
     e.preventDefault();
   try {
     const res = await api.post("/users/login", { email, password });
+      login(res.data.user, res.data.token);
 
-    // 🧠 Pasamos la respuesta completa como objeto { user, token }
-    login(res.data);
 
     navigate("/home");
   } catch (err) {

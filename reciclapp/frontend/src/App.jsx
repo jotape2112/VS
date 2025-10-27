@@ -6,6 +6,8 @@ import Home from "./pages/Home";
 import History from "./pages/History";
 import Points from "./pages/Points";
 import NewRequest from "./pages/NewRequest";
+import Requests from "./pages/Requests";
+import CompanyHistory from "./pages/CompanyHistory";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route path="/history" element={<History />} />
           <Route path="/points" element={<Points />} />
           <Route path="/new-request" element={<NewRequest />} />
+          <Route path="/requests" element={<Requests />} />
+          <Route path="/company-history" element={<CompanyHistory />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>

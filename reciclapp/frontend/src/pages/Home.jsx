@@ -1,81 +1,71 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Layout from "../components/Layout";
 
 function Home() {
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log("🔍 Usuario logueado:", user);
-  }, [user]);
-
   return (
-    <div className="p-4">
-      <h1 className="text-xl font-bold mb-6">Bienvenido, {user?.name}</h1>
-      {/* resto del código */}
-    </div>
-  );
-}
-
-export default Home;
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-100 to-green-300">
-      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md text-center">
+    <Layout>
+      <div className="max-w-2xl mx-auto text-center bg-white shadow-lg rounded-2xl p-8 border border-green-200">
         <h1 className="text-3xl font-bold text-green-700 mb-6">
-          ♻️ Bienvenido{user ? `, ${user.name}` : ""}!
+          Bienvenido{user ? `, ${user.name}` : ""} 👋
         </h1>
+        <p className="text-gray-600 mb-8">
+          {user?.role === "usuario"
+            ? "Aquí puedes crear solicitudes y ver tus puntos de reciclaje."
+            : "Aquí puedes gestionar las solicitudes de los usuarios y revisar el historial completado."}
+        </p>
 
-       <div className="flex flex-col gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {user?.role === "usuario" && (
             <>
               <button
                 onClick={() => navigate("/new-request")}
-                className="bg-purple-600 text-white p-2 rounded"
+                className="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-lg font-semibold transition"
               >
                 Nueva Solicitud
               </button>
-        
+
               <button
                 onClick={() => navigate("/history")}
-                className="bg-blue-500 text-white p-2 rounded"
+                className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-semibold transition"
               >
                 Ver Historial de Solicitudes
               </button>
-        
+
               <button
                 onClick={() => navigate("/points")}
-                className="bg-green-600 text-white p-2 rounded"
+                className="bg-green-600 hover:bg-green-700 text-white p-3 rounded-lg font-semibold transition"
               >
                 Ver Puntos de Reciclaje
               </button>
             </>
           )}
-        
+
           {user?.role === "empresa" && (
             <>
               <button
                 onClick={() => navigate("/requests")}
-                className="bg-blue-500 text-white p-2 rounded"
+                className="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-semibold transition"
               >
                 Ver Solicitudes
               </button>
+
+              <button
+                onClick={() => navigate("/company-history")}
+                className="bg-emerald-600 hover:bg-emerald-700 text-white p-3 rounded-lg font-semibold transition"
+              >
+                Ver Historial Completadas
+              </button>
             </>
           )}
-        
-          <button
-            onClick={() => {
-              logout();
-              navigate("/");
-            }}
-            className="bg-red-500 text-white p-2 rounded"
-          >
-            Cerrar Sesión
-          </button>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }
 
-
+export default Home;
